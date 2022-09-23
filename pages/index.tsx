@@ -49,7 +49,7 @@ const Home: NextPage = () => {
                 <div className="w-1/3 text-center">첫인상</div>
                 <div className="w-1/3 text-center">현인상</div>
               </div>
-              {Array.from({ length: listCnt }).map((index) => {
+              {Array.from({ length: listCnt }).map((key, index) => {
                 return <List key={index} />
               })}
             </div>
