@@ -1,17 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { List } from 'components/List'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 
 const Home: NextPage = () => {
   const downloadRef = useRef<HTMLDivElement>(null)
-  // const list = useState([
-  //   {
-  //     index: 0,
-  //   },
-  // ])
+  const [listCnt, setListCnt] = useState(1)
+  const maxCnt = 5
 
   const clickSaveBtn = async () => {
     if (downloadRef.current) {
@@ -28,7 +25,13 @@ const Home: NextPage = () => {
     }
   }
 
-  const addItem = () => {}
+  const addItem = useCallback(() => {
+    if (listCnt === maxCnt) {
+      alert(`최대 ${maxCnt}명까지 만들 수 있습니다.`)
+      return
+    }
+    setListCnt((prev) => prev + 1)
+  }, [listCnt])
 
   return (
     <div>
@@ -37,7 +40,7 @@ const Home: NextPage = () => {
         <meta name="description" content="첫인상 현인상 만들기" />
       </Head>
       <div className="container md:container md:mx-auto min-h-screen min-w-full">
-        <main className="p-4 min-w-[90%] h-96" ref={downloadRef}>
+        <main className="p-4 min-w-[90%] min-h-96" ref={downloadRef}>
           <div>
             <h3 className="font-bold text-center text-2xl m-4">첫인상/현인상 만들기</h3>
             <div>
@@ -46,7 +49,9 @@ const Home: NextPage = () => {
                 <div className="w-1/3 text-center">첫인상</div>
                 <div className="w-1/3 text-center">현인상</div>
               </div>
-              <List />
+              {Array.from({ length: listCnt }).map((index) => {
+                return <List key={index} />
+              })}
             </div>
           </div>
         </main>
