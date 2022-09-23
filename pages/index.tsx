@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { useRef, useState } from 'react'
 import { List, ListProp } from 'components/List'
 import domtoimage from 'dom-to-image'
-// import { saveAs } from 'file-saver'
 
 const Home: NextPage = () => {
   const downloadRef = useRef<HTMLDivElement>(null)
@@ -20,8 +19,10 @@ const Home: NextPage = () => {
         link.href = dataUrl
         link.download = 'impression.png'
         link.click()
-        link.remove()
-        window.URL.revokeObjectURL(dataUrl)
+        setTimeout(() => {
+          link.remove()
+          window.URL.revokeObjectURL(dataUrl)
+        })
       })
     }
   }
