@@ -12,17 +12,16 @@ const Home: NextPage = () => {
   //   },
   // ])
 
-  const clickSaveBtn = () => {
+  const clickSaveBtn = async () => {
     if (downloadRef.current) {
-      domtoimage.toPng(downloadRef.current).then((dataUrl: string) => {
-        const link = document.createElement('a')
-        link.href = dataUrl
-        link.download = 'impression.png'
-        link.click()
-        setTimeout(() => {
-          link.remove()
-          window.URL.revokeObjectURL(dataUrl)
-        })
+      const dataUrl = await domtoimage.toPng(downloadRef.current)
+      const link = document.createElement('a')
+      link.href = dataUrl
+      link.download = 'impression.png'
+      link.click()
+      setTimeout(() => {
+        link.remove()
+        window.URL.revokeObjectURL(dataUrl)
       })
     }
   }
