@@ -10,8 +10,16 @@ const Home: NextPage = () => {
 
   const clickSaveBtn = () => {
     if (listRef.current) {
-      domtoimage.toBlob(listRef.current).then(function (blob: any) {
-        saveAs(blob, 'image.png')
+      domtoimage.toBlob(listRef.current).then(function (blob: Blob) {
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'impression.png'
+        link.click()
+        setTimeout(() => {
+          link.remove()
+          window.URL.revokeObjectURL(url)
+        })
       })
     }
   }
