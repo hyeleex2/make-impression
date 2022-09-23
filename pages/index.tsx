@@ -38,7 +38,7 @@ const Home: NextPage = () => {
       <div className="container md:container md:mx-auto">
         <main className="p-4 min-w-[90%]">
           <div ref={downloadRef}>
-            <h3 className="font-bold text-center text-2xl m-4">첫인상/현인상 만들기</h3>
+            <h3 className="font-bold text-center text-2xl m-4">첫인상/현인상 만들기~!~!</h3>
             <div>
               <div className="flex flex-nowrap space-x-4 w-full mb-3">
                 <div className="w-1/3 text-center">사람</div>
