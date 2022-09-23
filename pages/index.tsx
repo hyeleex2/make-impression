@@ -1,16 +1,16 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRef, useState } from 'react'
-import { List, ListProp } from 'components/List'
+import { List } from 'components/List'
 import domtoimage from 'dom-to-image'
 
 const Home: NextPage = () => {
   const downloadRef = useRef<HTMLDivElement>(null)
-  const list = useState([
-    {
-      index: 0,
-    },
-  ])
+  // const list = useState([
+  //   {
+  //     index: 0,
+  //   },
+  // ])
 
   const clickSaveBtn = () => {
     if (downloadRef.current) {
