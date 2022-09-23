@@ -1,4 +1,3 @@
-import { ChangeEvent, useRef, useState } from 'react'
 import { ImageCard } from 'components/ImageCard'
 
 export const List = () => {
