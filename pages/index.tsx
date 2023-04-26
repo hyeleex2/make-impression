@@ -12,12 +12,6 @@ const Home: NextPage = () => {
 
   const clickSaveBtn = async () => {
     if (downloadRef.current) {
-      const dataUrl = await domtoimage.toPng(downloadRef.current)
-      // const img = new Image()
-      // img.src = dataUrl
-      // const tab = window.open('', '_blank')
-      // tab?.document.write(img.outerHTML)
-
       const blob = await domtoimage.toBlob(downloadRef.current)
       const files = [
         new File([blob], 'image.png', {
@@ -42,7 +36,7 @@ const Home: NextPage = () => {
 
     const a = document.createElement('a')
     a.href = dataUrl
-    a.download = `image.png`
+    a.download = 'image.png'
     a.click()
     console.log('Downloaded successfully')
   }
