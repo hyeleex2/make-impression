@@ -38,7 +38,7 @@ const Home: NextPage = () => {
     }
   }
 
-  const test = async () => {}
+  // const test = async () => {}
 
   const addItem = useCallback(() => {
     if (listCnt === maxCnt) {
@@ -78,9 +78,9 @@ const Home: NextPage = () => {
           <button className="block border rounded-full p-2 m-2 w-32 text-black" onClick={clickSaveBtn}>
             이미지로 저장
           </button>
-          <button className="block border rounded-full p-2 m-2 w-32 text-black" onClick={test}>
+          {/* <button className="block border rounded-full p-2 m-2 w-32 text-black" onClick={test}>
             테스트
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
