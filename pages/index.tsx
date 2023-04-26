@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 
       const blob = await domtoimage.toBlob(downloadRef.current)
       const files = [
-        new File([blob], 'image.jpeg', {
+        new File([blob], 'image.png', {
           type: blob.type,
           lastModified: new Date().getTime(),
         }),
@@ -29,20 +29,23 @@ const Home: NextPage = () => {
         files,
       }
       if (!window.navigator.canShare) {
-        return alert('cant support share')
+        return downloadFile()
       }
       await window.navigator.share(shareData).then(() => {
-        // Download image using anchor element
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `image.jpeg`
-        a.click()
-        console.log('Downloaded successfully')
+        downloadFile()
       })
     }
   }
+  const downloadFile = async () => {
+    if (!downloadRef.current) return
+    const dataUrl = await domtoimage.toPng(downloadRef.current)
 
-  // const test = async () => {}
+    const a = document.createElement('a')
+    a.href = dataUrl
+    a.download = `image.png`
+    a.click()
+    console.log('Downloaded successfully')
+  }
 
   const addItem = useCallback(() => {
     if (listCnt === maxCnt) {
