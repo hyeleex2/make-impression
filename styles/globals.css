@@ -3,44 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --background: #fff;
+  --background: #000;
   --text: #363636;
   --heading-text: #000;
   --anchor-text: #0076d1;
   --code-background: #efefef;
-  --code-text: #000;
+  --code-text: #fff;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #202b38;
-    --text: #dbdbdb;
-    --heading-text: #fff;
-    --anchor-text: #0076d1;
-    --code-background: #161f27;
-    --code-text: #ffbe85;
-  }
-  html {
-    color-scheme: dark;
-    color: var(--text);
-  }
-  body {
-    color-scheme: dark;
-    color: var(--text);
-  }
-}
-
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 html {
-  color-scheme: dark;
+  background-color: #000;
+  color: #fff;
+  /* color-scheme: dark; */
 }
 
 * {
