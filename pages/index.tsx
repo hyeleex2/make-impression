@@ -20,17 +20,19 @@ const Home: NextPage = () => {
 
       const blob = await domtoimage.toBlob(downloadRef.current)
       console.log('blob : ', blob)
-      const files = new File([blob], 'image.jpeg', {
-        type: blob.type,
-        lastModified: new Date().getTime(),
-      })
+      const files = [
+        new File([blob], 'image.jpeg', {
+          type: blob.type,
+          lastModified: new Date().getTime(),
+        }),
+      ]
       const shareData = {
         files,
       }
       if (!window.navigator.canShare) {
         return alert('cant support share')
       }
-      await window.navigator.share(shareData as any).then(() => {
+      await window.navigator.share(shareData).then(() => {
         alert('되냐')
       })
     }
