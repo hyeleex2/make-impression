@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useCallback, useRef, useState } from 'react'
 import { List } from 'components/List'
 import domtoimage from 'dom-to-image'
-import { saveAs } from 'file-saver'
+// import { saveAs } from 'file-saver'
 
 const Home: NextPage = () => {
   const downloadRef = useRef<HTMLDivElement>(null)
