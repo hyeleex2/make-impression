@@ -7,32 +7,37 @@ import { saveAs } from 'file-saver'
 
 const Home: NextPage = () => {
   const downloadRef = useRef<HTMLDivElement>(null)
-  const testRef = useRef<HTMLDivElement>(null)
   const [listCnt, setListCnt] = useState(1)
   const maxCnt = 7
 
   const clickSaveBtn = async () => {
     if (downloadRef.current) {
-      const dataUrl = await domtoimage.toPng(downloadRef.current)
-      console.log('dataUrl : ', dataUrl)
-      const img = new Image()
-      img.src = dataUrl
-      const tab = window.open('', '_blank')
-      tab?.document.write(img.outerHTML)
-      // const a = document.createElement('a')
-      // a.setAttribute('download', 'reactflow.png')
-      // a.setAttribute('href', dataUrl)
-      // a.click()
-      // saveAs(dataUrl, 'impression.png')
+      // const dataUrl = await domtoimage.toPng(downloadRef.current)
+      // const img = new Image()
+      // img.src = dataUrl
+      // const tab = window.open('', '_blank')
+      // tab?.document.write(img.outerHTML)
+
+      const blob = await domtoimage.toBlob(downloadRef.current)
+      console.log('blob : ', blob)
+      const files = new File([blob], 'image.jpeg', {
+        type: blob.type,
+        lastModified: new Date().getTime(),
+      })
+      const shareData = {
+        files,
+      }
+      if (!window.navigator.canShare) {
+        return alert('cant support share')
+      }
+      await window.navigator.share(shareData as any).then(() => {
+        alert('되냐')
+      })
     }
   }
 
-  const test = async () => {
-    if (testRef.current) {
-      const img = await domtoimage.toBlob(testRef?.current)
-      console.log('img : ', img)
-    }
-  }
+  const test = async () => {}
+
   const addItem = useCallback(() => {
     if (listCnt === maxCnt) {
       alert(`최대 ${maxCnt}명까지 만들 수 있습니다.`)
@@ -64,9 +69,6 @@ const Home: NextPage = () => {
             </div>
           </div>
         </main>
-        {/* <div ref={testRef}>
-          <img src="https://i.pinimg.com/236x/b8/0f/78/b80f78373c2903fe3362cbf06a3cbd92.jpg" />
-        </div> */}
         <div className="flex flex-col mt-20 justify-center items-center">
           <button className="block border rounded-full p-2 m-2 w-32 text-black" onClick={addItem}>
             추가
@@ -74,7 +76,6 @@ const Home: NextPage = () => {
           <button className="block border rounded-full p-2 m-2 w-32 text-black" onClick={clickSaveBtn}>
             이미지로 저장
           </button>
-
           <button className="block border rounded-full p-2 m-2 w-32 text-black" onClick={test}>
             테스트
           </button>
